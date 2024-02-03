@@ -25,17 +25,14 @@ export const BasketModal = ({ isOpen, onClose }: ProductModalProps) => {
   const { selectedProducts } = useSelectedProducts()
 
   useEffect(() => {
-    // Retrieve selected product IDs from localStorage
     const storedSelectedProductIds = JSON.parse(
       window.localStorage.getItem('selected') || '[]'
     )
 
-    // Filter productsData based on selected product IDs
     const filteredProductsData = productsData.filter((product) =>
       storedSelectedProductIds.includes(product.id)
     )
 
-    // Set the selected products to state
     setSelectedProductsData(filteredProductsData)
   }, [selectedProducts])
 
@@ -47,7 +44,6 @@ export const BasketModal = ({ isOpen, onClose }: ProductModalProps) => {
             <li key={product.id}>
               <div className='flex m-3'>
                 <Image
-                  className=''
                   alt='icon buy'
                   width={200}
                   height={300}

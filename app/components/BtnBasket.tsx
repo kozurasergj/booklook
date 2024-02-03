@@ -15,7 +15,6 @@ export const BtnBasket = ({
       <button onClick={() => setIsBasketModalOpen(true)}>
         <Image
           src='/buy.svg'
-          className=''
           alt='icon buy'
           width={40}
           height={40}

@@ -14,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Добавьте стили в ваш файл CSS или в ProductModal.js */
+/* Modal */
 .modal {
   display: none;
   position: fixed;
@@ -77,9 +77,9 @@ body {
   bottom: 50%;
   left: 0;
   right: 0;
-  top: -1px; /* Сдвигаем вверх на 1px для обрезки линии */
-  border-bottom: 1px solid #000; /* Цвет и стиль линии */
-  transform: rotate(45deg); /* Поворачиваем линию на 45 градусов */
+  top: -1px;
+  border-bottom: 1px solid #000;
+  transform: rotate(45deg);
 }
 
 .text-with-line::after {
@@ -88,7 +88,7 @@ body {
   bottom: 50%;
   left: 0;
   right: 0;
-  top: -1px; /* Сдвигаем вверх на 1px для обрезки линии */
-  border-bottom: 1px solid #000; /* Цвет и стиль линии */
-  transform: rotate(-45deg); /* Поворачиваем линию на 45 градусов */
+  top: -1px;
+  border-bottom: 1px solid #000;
+  transform: rotate(-45deg);
 }

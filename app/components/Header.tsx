@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className='flex items-center justify-between m-6 '>
+      <div className='flex items-center justify-between m-6'>
         <h1 className='text-4xl text-center mx-auto'>Nanushka</h1>
         <BtnBasket setIsBasketModalOpen={setIsBasketModalOpen} />
         <BasketModal

@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import { productsData } from '../mocks'
+import { IProduct } from './BasketModal'
 import { BtnClose } from './BtnClose'
 import { useSelectedProducts } from './SelectedProductsContext'
-import { useEffect, useState } from 'react'
-import { IProduct } from './BasketModal'
 
 interface ProductModalProps {
   isOpen: boolean
@@ -13,23 +12,23 @@ interface ProductModalProps {
 export const ProductsModal = ({ isOpen, onClose }: ProductModalProps) => {
   const { addProductToSelection } = useSelectedProducts()
 
-     const handleAddToBag = (productId: number) => {
-       addProductToSelection(productId)
-       addLocalStorage(productId)
-     }
+  const handleAddToBag = (productId: number) => {
+    addProductToSelection(productId)
+    addLocalStorage(productId)
+  }
 
-     const addLocalStorage = (productId: number) => {
-       const storedSelectedProducts = JSON.parse(
-         window.localStorage.getItem('selected') || '[]'
-       )
+  const addLocalStorage = (productId: number) => {
+    const storedSelectedProducts = JSON.parse(
+      window.localStorage.getItem('selected') || '[]'
+    )
 
-       const updatedSelectedProducts = [...storedSelectedProducts, productId]
+    const updatedSelectedProducts = [...storedSelectedProducts, productId]
 
-       window.localStorage.setItem(
-         'selected',
-         JSON.stringify(updatedSelectedProducts)
-       )
-     }
+    window.localStorage.setItem(
+      'selected',
+      JSON.stringify(updatedSelectedProducts)
+    )
+  }
 
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`} onClick={onClose}>
@@ -42,11 +41,10 @@ export const ProductsModal = ({ isOpen, onClose }: ProductModalProps) => {
           height={2264}
         />
         <ul className='flex flex-col justify-between gap-2 overflow-scroll'>
-          {productsData.map((product:IProduct) => (
+          {productsData.map((product: IProduct) => (
             <li key={product.id}>
               <div className='flex m-3'>
                 <Image
-                  className=''
                   alt='icon buy'
                   width={200}
                   height={300}
