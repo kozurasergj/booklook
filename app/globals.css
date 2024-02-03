@@ -2,32 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #f8f8f8;
+  font-family: fantasy;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Добавьте стили в ваш файл CSS или в ProductModal.js */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  margin: 40px;
+  border-radius: 5px;
+  width: 90vw;
+  height: 90vh;
+  text-align: center;
+  display: flex;
+  gap: 40px;
+
+  position: relative;
+}
+
+.modal-img {
+  width: 40%;
+}
+
+@media screen and (max-width: 1000px) {
+  .modal-img {
+    display: none;
   }
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.text-with-line {
+  position: relative;
+  text-decoration: none;
+  color: #b00000;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.text-with-line::before {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+  top: -1px; /* Сдвигаем вверх на 1px для обрезки линии */
+  border-bottom: 1px solid #000; /* Цвет и стиль линии */
+  transform: rotate(45deg); /* Поворачиваем линию на 45 градусов */
+}
+
+.text-with-line::after {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  right: 0;
+  top: -1px; /* Сдвигаем вверх на 1px для обрезки линии */
+  border-bottom: 1px solid #000; /* Цвет и стиль линии */
+  transform: rotate(-45deg); /* Поворачиваем линию на 45 градусов */
 }
