@@ -17,7 +17,7 @@ export const productsData = [
   },
   {
     id: 3,
-    name: 'DORA',
+    name: 'DORY',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     imageSrc: '/3.webp',
     price: '234EUR',
@@ -25,7 +25,7 @@ export const productsData = [
   },
   {
     id: 4,
-    name: 'Bora',
+    name: 'Bone',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     imageSrc: '/1.webp',
     price: '434EUR',
@@ -33,7 +33,7 @@ export const productsData = [
   },
   {
     id: 5,
-    name: 'FIDA',
+    name: 'NADY',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     imageSrc: '/2.webp',
     price: '534EUR',
@@ -41,7 +41,7 @@ export const productsData = [
   },
   {
     id: 6,
-    name: 'DORA',
+    name: 'SAS',
     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     imageSrc: '/3.webp',
     price: '234EUR',

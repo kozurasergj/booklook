@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import { productsData } from '../mocks'
 import { BtnClose } from './BtnClose'
 import { useSelectedProducts } from './SelectedProductsContext'
@@ -8,18 +9,41 @@ interface ProductModalProps {
   onClose: () => void
 }
 
-export const BasketModal = ({ isOpen, onClose }: ProductModalProps) => {
-   const { selectedProducts } = useSelectedProducts()
+export interface IProduct {
+  id: number
+  name: string
+  description: string
+  imageSrc: string
+  price: string
+  discountedPrice: string
+}
 
-   const selectedProductsData = productsData.filter((product) =>
-     selectedProducts.includes(product.id)
-   )
+export const BasketModal = ({ isOpen, onClose }: ProductModalProps) => {
+  const [selectedProductsData, setSelectedProductsData] = useState<IProduct[]>(
+    []
+  )
+  const { selectedProducts } = useSelectedProducts()
+
+  useEffect(() => {
+    // Retrieve selected product IDs from localStorage
+    const storedSelectedProductIds = JSON.parse(
+      window.localStorage.getItem('selected') || '[]'
+    )
+
+    // Filter productsData based on selected product IDs
+    const filteredProductsData = productsData.filter((product) =>
+      storedSelectedProductIds.includes(product.id)
+    )
+
+    // Set the selected products to state
+    setSelectedProductsData(filteredProductsData)
+  }, [selectedProducts])
 
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`} onClick={onClose}>
       <div className='modal-content' onClick={(e) => e.stopPropagation()}>
         <ul className='flex flex-col justify-start gap-2 overflow-scroll mx-auto'>
-          {selectedProductsData.map((product) => (
+          {selectedProductsData.map((product: IProduct) => (
             <li key={product.id}>
               <div className='flex m-3'>
                 <Image
@@ -35,9 +59,9 @@ export const BasketModal = ({ isOpen, onClose }: ProductModalProps) => {
                       {product.name}
                     </h3>
                     <p className='mx-6 mb-6 text-left'>{product.description}</p>
-                    <button
-                      className='mx-6 py-2 px-5 border border-black rounded-md hover:bg-gray-200'
-                    >Go to checkout</button>
+                    <button className='mx-6 py-2 px-5 border border-black rounded-md hover:bg-gray-200'>
+                      Go to checkout
+                    </button>
                   </div>
                   <div className='flex flex-col w-[30%] mr-2'>
                     <span className='text-right'>{product.price}</span>

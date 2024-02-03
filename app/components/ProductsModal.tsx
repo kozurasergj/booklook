@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { productsData } from '../mocks'
 import { BtnClose } from './BtnClose'
 import { useSelectedProducts } from './SelectedProductsContext'
+import { useEffect, useState } from 'react'
+import { IProduct } from './BasketModal'
 
 interface ProductModalProps {
   isOpen: boolean
@@ -11,9 +13,23 @@ interface ProductModalProps {
 export const ProductsModal = ({ isOpen, onClose }: ProductModalProps) => {
   const { addProductToSelection } = useSelectedProducts()
 
-  const handleAddToBag = (productId: number) => {
-    addProductToSelection(productId)
-  }
+     const handleAddToBag = (productId: number) => {
+       addProductToSelection(productId)
+       addLocalStorage(productId)
+     }
+
+     const addLocalStorage = (productId: number) => {
+       const storedSelectedProducts = JSON.parse(
+         window.localStorage.getItem('selected') || '[]'
+       )
+
+       const updatedSelectedProducts = [...storedSelectedProducts, productId]
+
+       window.localStorage.setItem(
+         'selected',
+         JSON.stringify(updatedSelectedProducts)
+       )
+     }
 
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`} onClick={onClose}>
@@ -26,7 +42,7 @@ export const ProductsModal = ({ isOpen, onClose }: ProductModalProps) => {
           height={2264}
         />
         <ul className='flex flex-col justify-between gap-2 overflow-scroll'>
-          {productsData.map((product) => (
+          {productsData.map((product:IProduct) => (
             <li key={product.id}>
               <div className='flex m-3'>
                 <Image
@@ -44,8 +60,10 @@ export const ProductsModal = ({ isOpen, onClose }: ProductModalProps) => {
                     <p className='mx-6 mb-6 text-left'>{product.description}</p>
                     <button
                       className='mx-6 py-2 px-5 border border-black rounded-md hover:bg-gray-200'
-                      onClick={() => handleAddToBag(product.id)}
-                      
+                      onClick={() => {
+                        handleAddToBag(product.id)
+                        addLocalStorage(product.id)
+                      }}
                     >
                       Add to bag
                     </button>
