@@ -7,23 +7,10 @@ import { ProductsModal } from './ProductsModal'
 export const Presentation = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const openModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-  }
-
   return (
     <section className='mb-6'>
-      <div className='flex items-center justify-between my-6'>
-        <Image
-          src='/logo.webp'
-          alt='icon buy'
-          width={1500}
-          height={2264}
-        />
+      <div className='flex flex-col md:flex-row gap-4 items-center justify-between my-6'>
+        <Image src='/logo.webp' alt='icon buy' width={1500} height={2264} />
         <h3 className='text-lg text-center px-4'>
           Our latest collection demonstrates an elegant eccentricity – bold
           patterns inspired by traditional nomadic dressing, embroidered
@@ -31,8 +18,11 @@ export const Presentation = () => {
           stark, clean-lined silhouettes that showcase refined modernity.
         </h3>
       </div>
-      <BtnLook onClick={openModal} />
-      <ProductsModal isOpen={isModalOpen} onClose={closeModal} />
+      <BtnLook onClick={() => setIsModalOpen(!isModalOpen)} />
+      <ProductsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   )
 }
